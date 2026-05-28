@@ -1,11 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Departamento de Geoquímica - UFF</title>
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -22,12 +25,14 @@
     }
 
     /* MENU LATERAL */
+
     .sidebar {
       width: 280px;
       background-color: #002b5c;
       color: white;
       padding: 20px;
       overflow-y: auto;
+      transition: left 0.3s ease;
     }
 
     .sidebar h1 {
@@ -77,11 +82,13 @@
     }
 
     /* CONTEÚDO */
+
     .content {
       flex: 1;
       background-color: white;
       display: flex;
       flex-direction: column;
+      min-width: 0;
     }
 
     .topbar {
@@ -126,27 +133,96 @@
       font-size: 17px;
     }
 
+    /* BOTÃO MENU MOBILE */
+
+    .menu-toggle {
+      display: none;
+    }
+
+    /* MOBILE */
+
     @media (max-width: 768px) {
+
       body {
-        flex-direction: column;
+        flex-direction: row;
       }
 
       .sidebar {
-        width: 100%;
-        height: auto;
+        position: fixed;
+        left: -260px;
+        top: 0;
+        width: 260px;
+        height: 100vh;
+        z-index: 1000;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1100;
+        background-color: #002b5c;
+        color: white;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 24px;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
       }
 
       .content {
-        height: 100%;
+        width: 100%;
       }
+
+      .topbar {
+        padding-left: 70px;
+      }
+
+      .topbar h1 {
+        font-size: 22px;
+      }
+
+      .topbar p {
+        font-size: 13px;
+      }
+
+      iframe {
+        height: calc(100vh - 100px);
+      }
+
     }
+
   </style>
 </head>
 
 <body>
 
+  <!-- BOTÃO MENU MOBILE -->
+
+  <button class="menu-toggle" onclick="toggleMenu()">
+    ☰
+  </button>
+
   <!-- MENU -->
-  <aside class="sidebar">
+
+  <aside class="sidebar" id="sidebar">
+
+    <h1>Departamento de Geoquímica - GEO</h1>
+
+    <h2>
+      Instituto de Química - IQ<br>
+      Universidade Federal Fluminense - UFF
+    </h2>
 
     <div class="menu-item">
       <button onclick="loadPage('apresentacao')">
@@ -155,30 +231,55 @@
     </div>
 
     <div class="menu-item">
+
       <button>Pessoas</button>
 
       <div class="submenu">
-        <button onclick="loadPage('docentes')">Docentes</button>
-        <button onclick="loadPage('tecnicos')">Técnicos</button>
+        <button onclick="loadPage('docentes')">
+          Docentes
+        </button>
+
+        <button onclick="loadPage('tecnicos')">
+          Técnicos
+        </button>
       </div>
+
     </div>
 
     <div class="menu-item">
+
       <button>Ensino</button>
 
       <div class="submenu">
-        <button onclick="loadPage('disciplinas')">Disciplinas</button>
-        <button onclick="loadPage('horarios')">Quadro de Horários</button>
+
+        <button onclick="loadPage('disciplinas')">
+          Disciplinas
+        </button>
+
+        <button onclick="loadPage('horarios')">
+          Quadro de Horários
+        </button>
+
       </div>
+
     </div>
 
     <div class="menu-item">
+
       <button>Projetos</button>
 
       <div class="submenu">
-        <button onclick="loadPage('pesquisa')">Projetos de Pesquisa</button>
-        <button onclick="loadPage('extensao')">Projetos de Extensão</button>
+
+        <button onclick="loadPage('pesquisa')">
+          Projetos de Pesquisa
+        </button>
+
+        <button onclick="loadPage('extensao')">
+          Projetos de Extensão
+        </button>
+
       </div>
+
     </div>
 
     <div class="menu-item">
@@ -196,16 +297,26 @@
   </aside>
 
   <!-- CONTEÚDO -->
+
   <main class="content">
 
     <div class="topbar">
-      <h1>Departamento de Geoquímica - GEO</h1>
-      <p>Instituto de Química - IQ | Universidade Federal Fluminense - UFF</p>
+
+      <h1>
+        Departamento de Geoquímica - GEO
+      </h1>
+
+      <p>
+        Instituto de Química - IQ |
+        Universidade Federal Fluminense - UFF
+      </p>
+
     </div>
 
     <div class="iframe-container" id="main-content">
 
       <div class="welcome">
+
         <h2>Bem-vindo(a)</h2>
 
         <p>
@@ -216,13 +327,14 @@
         <p>
           Utilize o menu lateral para acessar informações sobre
           docentes, técnicos, disciplinas, projetos, reuniões
-          departamentais e formas de contato. Confira.
+          departamentais e formas de contato.
         </p>
 
         <p>
           Todas as informações são atualizadas diretamente por
           documentos integrados ao sistema do departamento.
         </p>
+
       </div>
 
     </div>
@@ -232,7 +344,7 @@
   <script>
 
     /*
-      COLE AQUI OS LINKS EMBED DOS GOOGLE DOCS
+      LINKS DOS GOOGLE DOCS
     */
 
     const pages = {
@@ -266,7 +378,39 @@
 
     };
 
-function loadPage(page) { const container = document.getElementById("main-content"); container.innerHTML = ` <iframe src="${pages[page]}"></iframe> `; } /* Abre automaticamente a página "Apresentação" quando o site carregar */ window.onload = function () { loadPage('apresentacao'); };
+    function loadPage(page) {
+
+      const container = document.getElementById("main-content");
+
+      container.innerHTML = `
+        <iframe src="${pages[page]}"></iframe>
+      `;
+
+      /* Fecha o menu no celular após clicar */
+
+      if (window.innerWidth <= 768) {
+        document
+          .getElementById("sidebar")
+          .classList.remove("active");
+      }
+
+    }
+
+    /* MENU MOBILE */
+
+    function toggleMenu() {
+
+      document
+        .getElementById("sidebar")
+        .classList.toggle("active");
+
+    }
+
+    /* ABRE AUTOMATICAMENTE APRESENTAÇÃO */
+
+    window.onload = function () {
+      loadPage('apresentacao');
+    };
 
   </script>
 
