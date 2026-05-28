@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Departamento de Geoquímica - UFF</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      display: flex;
+      background-color: #f4f6f8;
+      color: #333;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* MENU LATERAL */
+    .sidebar {
+      width: 280px;
+      background-color: #002b5c;
+      color: white;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .sidebar h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .sidebar h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 30px;
+      color: #c7d7ea;
+    }
+
+    .menu-item {
+      margin-bottom: 10px;
+    }
+
+    .menu-item button {
+      width: 100%;
+      background: none;
+      border: none;
+      color: white;
+      text-align: left;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .menu-item button:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    .submenu {
+      margin-left: 15px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    .submenu button {
+      font-size: 14px;
+      padding: 8px 12px;
+      color: #dbe8f5;
+    }
+
+    /* CONTEÚDO */
+    .content {
+      flex: 1;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background-color: #ffffff;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .topbar h1 {
+      font-size: 28px;
+      color: #002b5c;
+    }
+
+    .topbar p {
+      margin-top: 5px;
+      color: #666;
+    }
+
+    .iframe-container {
+      flex: 1;
+      padding: 0;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .welcome {
+      padding: 40px;
+      line-height: 1.7;
+    }
+
+    .welcome h2 {
+      color: #002b5c;
+      margin-bottom: 20px;
+    }
+
+    .welcome p {
+      margin-bottom: 15px;
+      font-size: 17px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+      }
+
+      .content {
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MENU -->
+  <aside class="sidebar">
+
+    <h1>Departamento de Geoquímica</h1>
+    <h2>Instituto de Química - UFF</h2>
+
+    <div class="menu-item">
+      <button onclick="loadPage('apresentacao')">
+        Apresentação
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <button>Pessoas</button>
+
+      <div class="submenu">
+        <button onclick="loadPage('docentes')">Docentes</button>
+        <button onclick="loadPage('tecnicos')">Técnicos</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button>Ensino</button>
+
+      <div class="submenu">
+        <button onclick="loadPage('disciplinas')">Disciplinas</button>
+        <button onclick="loadPage('horarios')">Quadro de Horários</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button>Projetos</button>
+
+      <div class="submenu">
+        <button onclick="loadPage('pesquisa')">Projetos de Pesquisa</button>
+        <button onclick="loadPage('extensao')">Projetos de Extensão</button>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="loadPage('reunioes')">
+        Reuniões de Departamento
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="loadPage('contato')">
+        Contato
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- CONTEÚDO -->
+  <main class="content">
+
+    <div class="topbar">
+      <h1>Departamento de Geoquímica</h1>
+      <p>Universidade Federal Fluminense</p>
+    </div>
+
+    <div class="iframe-container" id="main-content">
+
+      <div class="welcome">
+        <h2>Bem-vindo(a)</h2>
+
+        <p>
+          Este é o portal oficial do Departamento de Geoquímica
+          do Instituto de Química da Universidade Federal Fluminense.
+        </p>
+
+        <p>
+          Utilize o menu lateral para acessar informações sobre
+          docentes, técnicos, disciplinas, projetos, reuniões
+          departamentais e formas de contato. Confira.
+        </p>
+
+        <p>
+          Todas as informações são atualizadas diretamente por
+          documentos integrados ao sistema do departamento.
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+
+    /*
+      COLE AQUI OS LINKS EMBED DOS GOOGLE DOCS
+    */
+
+    const pages = {
+
+      apresentacao:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true",
+
+      docentes:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true",
+
+      tecnicos:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true",
+
+      disciplinas:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true",
+
+      horarios:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true",
+
+      pesquisa:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true",
+
+      extensao:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true",
+
+      reunioes:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true",
+
+      contato:
+        "https://docs.google.com/document/d/SEU_ID/pub?embedded=true"
+
+    };
+
+    function loadPage(page) {
+
+      const container = document.getElementById("main-content");
+
+      container.innerHTML = `
+        <iframe src="${pages[page]}"></iframe>
+      `;
+    }
+
+  </script>
+
+</body>
+</html>
+```
