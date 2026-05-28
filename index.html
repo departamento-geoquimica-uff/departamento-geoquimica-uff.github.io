@@ -269,14 +269,7 @@
 
     };
 
-    function loadPage(page) {
-
-      const container = document.getElementById("main-content");
-
-      container.innerHTML = `
-        <iframe src="${pages[page]}"></iframe>
-      `;
-    }
+function loadPage(page) { const container = document.getElementById("main-content"); container.innerHTML = ` <iframe src="${pages[page]}"></iframe> `; } /* Abre automaticamente a página "Apresentação" quando o site carregar */ window.onload = function () { loadPage('apresentacao'); };
 
   </script>
 
