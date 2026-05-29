@@ -65,6 +65,22 @@
       line-height: 1.5;
     }
 
+    /* LOGO */
+
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.sidebar-logo img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  display: block;
+}
+    
     .menu-item {
       margin-bottom: 8px;
     }
@@ -343,7 +359,13 @@
   <!-- MENU -->
 
   <aside class="sidebar" id="sidebar">
-
+    
+<div class="sidebar-logo">
+  <img
+    src="https://raw.githubusercontent.com/departamento-geoquimica-uff/departamento-geoquimica-uff.github.io/refs/heads/main/GEO_logo.jpeg"
+    alt="Departamento de Geoquímica - GEO">
+</div>
+    
     <div class="menu-item">
       <button onclick="loadPage('apresentacao')">
         Apresentação
