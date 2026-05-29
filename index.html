@@ -235,15 +235,26 @@
 
       /* MENU */
 
-      .sidebar {
-        position: fixed;
-        top: 0;
-        left: calc(var(--menu-width) * -1);
-        height: 100vh;
-        width: var(--menu-width);
-        box-shadow: 4px 0 20px rgba(0,0,0,0.25);
-      }
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: calc(var(--menu-width) * -1);
+  width: var(--menu-width);
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.25);
+}
 
+      .sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+}
       .sidebar.active {
         left: 0;
       }
